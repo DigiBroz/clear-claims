@@ -7,7 +7,7 @@
 
     {!! SEO::generate() !!}
 
-    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700|space-grotesk:500,600,700" rel="stylesheet" />
 
@@ -19,7 +19,7 @@
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between">
                 <a href="{{ route('home') }}" class="py-2">
-                    <img src="{{ asset('images/logo.png') }}" alt="ClearClaims Health Accounts" class="h-28 w-auto">
+                    <img src="{{ asset('images/logo.png') }}" alt="ClearClaims Health Accounts" class="h-20 w-auto">
                 </a>
 
                 <div class="hidden items-center gap-8 md:flex">
@@ -57,7 +57,7 @@
             <div class="grid gap-12 md:grid-cols-4">
                 <div class="md:col-span-1">
                     <a href="{{ route('home') }}">
-                        <img src="{{ asset('images/logo.png') }}" alt="ClearClaims Health Accounts" class="h-36 w-auto">
+                        <img src="{{ asset('images/logo.png') }}" alt="ClearClaims Health Accounts" class="h-20 w-auto">
                     </a>
                     <p class="mt-4 text-sm leading-relaxed text-slate-500">Medical billing and practice support solutions that help South African healthcare providers get paid faster and spend less time on admin.</p>
                 </div>
