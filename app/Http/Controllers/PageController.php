@@ -65,4 +65,14 @@ class PageController extends Controller
 
         return view('pages.about');
     }
+
+    public function contact()
+    {
+        SEOTools::setTitle('Contact Us');
+        SEOTools::setDescription('Get in touch with ClearClaims Health Accounts. Tell us about your practice and we will show you how our medical billing and practice support services can help.');
+        $this->setMedicalBusinessJsonLd();
+        $this->setSeoImage();
+
+        return view('pages.contact');
+    }
 }

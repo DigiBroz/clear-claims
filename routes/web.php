@@ -10,5 +10,7 @@ Route::get('/services', [PageController::class, 'services'])->name('services');
 Route::get('/pricing', [PageController::class, 'pricing'])->name('pricing');
 
 Route::get('/about', [PageController::class, 'about'])->name('about');
-// Task 6 will replace this with the real Contact page route.
-Route::get('/contact', fn () => response('Coming soon.'))->name('contact');
+
+Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+// Task 7 will replace this with the real Contact form submission handler.
+Route::post('/contact', fn () => response('Coming soon.'))->name('contact.submit');
