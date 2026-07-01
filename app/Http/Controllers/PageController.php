@@ -55,4 +55,14 @@ class PageController extends Controller
 
         return view('pages.pricing');
     }
+
+    public function about()
+    {
+        SEOTools::setTitle('About ClearClaims Health Accounts');
+        SEOTools::setDescription('ClearClaims Health Accounts is a South African medical billing and practice support company built around accuracy, efficiency, confidentiality, and professional service.');
+        $this->setMedicalBusinessJsonLd();
+        $this->setSeoImage();
+
+        return view('pages.about');
+    }
 }
