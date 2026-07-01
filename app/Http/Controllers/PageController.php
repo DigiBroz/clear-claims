@@ -45,4 +45,14 @@ class PageController extends Controller
 
         return view('pages.services');
     }
+
+    public function pricing()
+    {
+        SEOTools::setTitle('Our Pricing Model');
+        SEOTools::setDescription('ClearClaims charges a percentage of collections, calculated only on money medical aids actually pay to your practice, not on submitted claims. See how our pricing model compares to flat fee billing.');
+        $this->setMedicalBusinessJsonLd();
+        $this->setSeoImage();
+
+        return view('pages.pricing');
+    }
 }
