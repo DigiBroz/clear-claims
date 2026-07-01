@@ -33,4 +33,12 @@ class HomePageTest extends TestCase
         $response->assertSee('You only pay when we collect', false);
         $response->assertSee('rounded-3xl border border-warm-border bg-warm-surface', false);
     }
+
+    public function test_pricing_teaser_is_a_rounded_island_and_closing_cta_uses_warm_treatment(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertSee('rounded-[2.5rem] bg-brand-900', false);
+        $response->assertSee('bg-warm-bg py-24', false);
+    }
 }

@@ -63,13 +63,17 @@
     </section>
 
     {{-- Pricing teaser --}}
-    <section class="border-y border-slate-200 bg-brand-900 py-24 text-white">
-        <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold">We Only Get Paid When You Get Paid</h2>
-            <p class="mt-6 text-lg text-brand-100">ClearClaims works on a percentage of collections model. Our fee is calculated on the money medical aids actually pay out to your practice, not on the claims we submit. If a claim is rejected or never paid, we do not charge for it. That keeps our incentives lined up with yours from the first submission to the final reconciled payment.</p>
-            <a href="{{ route('pricing') }}" class="mt-8 inline-flex items-center rounded-lg bg-growth-500 px-8 py-3.5 text-base font-semibold text-white transition hover:bg-growth-600">See How Our Pricing Works</a>
-            <div class="mt-10 flex justify-center">
-                <x-arrow-motif class="h-20 w-full max-w-md" />
+    <section class="bg-warm-bg py-24">
+        <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <div class="rounded-[2.5rem] bg-brand-900 px-8 py-16 text-center text-white sm:px-16">
+                <h2 class="text-3xl font-bold">We Only Get Paid When You Get Paid</h2>
+                <p class="mt-6 text-lg text-brand-100">ClearClaims works on a percentage of collections model. Our fee is calculated on the money medical aids actually pay out to your practice, not on the claims we submit. If a claim is rejected or never paid, we do not charge for it. That keeps our incentives lined up with yours from the first submission to the final reconciled payment.</p>
+                <a href="{{ route('pricing') }}" class="mt-8 inline-flex items-center rounded-full bg-growth-500 px-8 py-3.5 text-base font-semibold text-white transition hover:bg-growth-600">See How Our Pricing Works</a>
+                <div class="mt-10 flex justify-center">
+                    <div class="rounded-3xl border border-white/15 bg-white/10 p-6 backdrop-blur-sm">
+                        <x-arrow-motif class="h-20 w-full max-w-md" />
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -144,11 +148,9 @@
     </section>
 
     {{-- Closing CTA --}}
-    <section class="py-24">
-        <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-brand-900">Ready to Spend Less Time on Billing?</h2>
-            <p class="mt-4 text-slate-600">Tell us about your practice and we will show you what ClearClaims can take off your plate.</p>
-            <a href="{{ route('contact') }}" class="mt-8 inline-flex items-center rounded-lg bg-brand-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/20 transition hover:bg-brand-700">Book a Free Consultation</a>
-        </div>
-    </section>
+    <x-warm-cta>
+        <h2 class="text-3xl font-bold text-brand-900">Ready to Spend Less Time on Billing?</h2>
+        <p class="mt-4 text-slate-700">Tell us about your practice and we will show you what ClearClaims can take off your plate.</p>
+        <a href="{{ route('contact') }}" class="mt-8 inline-flex items-center rounded-full bg-brand-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/20 transition hover:bg-brand-700">Book a Free Consultation</a>
+    </x-warm-cta>
 @endsection
