@@ -4,6 +4,7 @@
     $uid = \Illuminate\Support\Str::random(8);
     $gradientId = 'arrow-gradient-' . $uid;
     $fillId = 'arrow-fill-' . $uid;
+    $gridId = 'arrow-grid-' . $uid;
     $pathD = 'M10 110 C 80 110, 100 70, 160 70 S 240 30, 300 30 L 355 30';
 @endphp
 
@@ -17,7 +18,14 @@
             <stop offset="0%" stop-color="#29a467" stop-opacity="0.3" />
             <stop offset="100%" stop-color="#29a467" stop-opacity="0" />
         </linearGradient>
+        <pattern id="{{ $gridId }}" width="40" height="30" patternUnits="userSpaceOnUse">
+            <path d="M40 0 L 0 0 0 30" fill="none" stroke="#4f96d3" stroke-opacity="0.35" stroke-width="1" />
+        </pattern>
     </defs>
+
+    <rect data-arrow-grid x="2" y="2" width="368" height="116" fill="url(#{{ $gridId }})" />
+
+    <path data-arrow-axis d="M4 4 L 4 118 L 372 118" stroke="#4f96d3" stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round" fill="none" />
 
     <path data-arrow-fill d="{{ $pathD }} L 355 130 L 10 130 Z" fill="url(#{{ $fillId }})" />
 

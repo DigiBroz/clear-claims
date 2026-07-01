@@ -13,7 +13,7 @@ class LayoutRedesignTest extends TestCase
         $response->assertOk();
         $response->assertSee('bg-warm-surface/90', false);
         $response->assertSee('border-warm-border', false);
-        $response->assertSee('h-32 w-auto', false);
+        $response->assertSee('h-28 w-auto', false);
         $response->assertSee('h-36 w-auto', false);
         $response->assertSee('bg-warm-bg', false);
     }
