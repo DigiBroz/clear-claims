@@ -10,6 +10,9 @@
                 <a href="{{ route('contact') }}" class="inline-flex items-center rounded-lg bg-brand-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/20 transition hover:bg-brand-700">Book a Free Consultation</a>
                 <a href="{{ route('pricing') }}" class="inline-flex items-center rounded-lg border border-slate-300 px-8 py-3.5 text-base font-semibold text-slate-700 transition hover:border-brand-400 hover:text-brand-700">See Our Pricing Model</a>
             </div>
+            <div class="mt-16">
+                <x-arrow-motif class="h-24 w-full max-w-2xl" />
+            </div>
         </div>
     </section>
 
@@ -56,6 +59,9 @@
             <h2 class="text-3xl font-bold">We Only Get Paid When You Get Paid</h2>
             <p class="mt-6 text-lg text-brand-100">ClearClaims works on a percentage of collections model. Our fee is calculated on the money medical aids actually pay out to your practice, not on the claims we submit. If a claim is rejected or never paid, we do not charge for it. That keeps our incentives lined up with yours from the first submission to the final reconciled payment.</p>
             <a href="{{ route('pricing') }}" class="mt-8 inline-flex items-center rounded-lg bg-growth-500 px-8 py-3.5 text-base font-semibold text-white transition hover:bg-growth-600">See How Our Pricing Works</a>
+            <div class="mt-10 flex justify-center">
+                <x-arrow-motif class="h-20 w-full max-w-md" />
+            </div>
         </div>
     </section>
 

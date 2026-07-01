@@ -13,6 +13,9 @@
             <h2 class="text-3xl font-bold text-brand-900">How the Percentage of Collections Model Works</h2>
             <p class="mt-6 text-slate-600">Our fee is a percentage of the money that is successfully paid out to your practice by the medical aid. It is never charged on the value of claims submitted, and it is never charged on claims that are rejected, disputed, or never paid. If a medical aid does not pay, we do not get paid either.</p>
             <p class="mt-4 text-slate-600">This means our incentives are aligned with yours from the first claim we submit. We are not paid for volume of paperwork. We are paid for money that actually lands in your practice's account, which is why we follow up on outstanding claims as hard as we do.</p>
+            <div class="mt-10">
+                <x-arrow-motif class="h-24 w-full" />
+            </div>
         </div>
     </section>
 
