@@ -18,3 +18,11 @@ Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::post('/contact', [ContactController::class, 'submit'])
     ->middleware([ProtectAgainstSpam::class, 'throttle:5,1'])
     ->name('contact.submit');
+
+Route::get('/sitemap.xml', function () {
+    return response(file_get_contents(public_path('sitemap.xml')), 200, ['Content-Type' => 'application/xml']);
+});
+
+Route::get('/robots.txt', function () {
+    return response(file_get_contents(public_path('robots.txt')), 200, ['Content-Type' => 'text/plain']);
+});
