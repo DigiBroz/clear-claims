@@ -12,15 +12,15 @@ class PageController extends Controller
 
         SEOTools::opengraph()->addImage($image);
         SEOTools::twitter()->setImage($image);
-        SEOTools::jsonLd()->addImage($image);
+        SEOTools::jsonLdMulti()->addImage($image);
     }
 
     private function setMedicalBusinessJsonLd(): void
     {
-        SEOTools::jsonLd()->setType('MedicalBusiness');
-        SEOTools::jsonLd()->addValue('telephone', '+27713395866');
-        SEOTools::jsonLd()->addValue('email', 'info@clearclaims.health');
-        SEOTools::jsonLd()->addValue('address', [
+        SEOTools::jsonLdMulti()->setType('MedicalBusiness');
+        SEOTools::jsonLdMulti()->addValue('telephone', '+27713395866');
+        SEOTools::jsonLdMulti()->addValue('email', 'info@clearclaims.health');
+        SEOTools::jsonLdMulti()->addValue('address', [
             '@type' => 'PostalAddress',
             'addressCountry' => 'ZA',
         ]);
