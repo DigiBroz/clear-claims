@@ -15,11 +15,11 @@
 </head>
 <body class="bg-white text-slate-700 antialiased">
     {{-- Navigation --}}
-    <nav class="fixed top-0 z-50 w-full border-b border-slate-200 bg-white/90 backdrop-blur-xl" x-data="{ open: false }">
+    <nav class="fixed top-0 z-50 w-full border-b border-warm-border bg-warm-surface/90 backdrop-blur-xl" x-data="{ open: false }">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between">
                 <a href="{{ route('home') }}" class="py-2">
-                    <img src="{{ asset('images/logo.png') }}" alt="ClearClaims Health Accounts" class="h-16 w-auto">
+                    <img src="{{ asset('images/logo.png') }}" alt="ClearClaims Health Accounts" class="h-20 w-auto">
                 </a>
 
                 <div class="hidden items-center gap-8 md:flex">
@@ -27,7 +27,7 @@
                     <a href="{{ route('services') }}" class="text-sm font-medium text-slate-600 transition hover:text-brand-600 {{ request()->routeIs('services') ? 'text-brand-600' : '' }}">Services</a>
                     <a href="{{ route('pricing') }}" class="text-sm font-medium text-slate-600 transition hover:text-brand-600 {{ request()->routeIs('pricing') ? 'text-brand-600' : '' }}">Pricing Model</a>
                     <a href="{{ route('about') }}" class="text-sm font-medium text-slate-600 transition hover:text-brand-600 {{ request()->routeIs('about') ? 'text-brand-600' : '' }}">About</a>
-                    <a href="{{ route('contact') }}" class="inline-flex items-center rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-700">Contact Us</a>
+                    <a href="{{ route('contact') }}" class="inline-flex items-center rounded-full bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-700">Contact Us</a>
                 </div>
 
                 <button @click="open = !open" class="md:hidden text-slate-600 hover:text-brand-600">
@@ -43,7 +43,7 @@
                 <a href="{{ route('services') }}" class="block rounded-lg px-3 py-2 text-base font-medium text-slate-600 hover:bg-slate-50 hover:text-brand-600">Services</a>
                 <a href="{{ route('pricing') }}" class="block rounded-lg px-3 py-2 text-base font-medium text-slate-600 hover:bg-slate-50 hover:text-brand-600">Pricing Model</a>
                 <a href="{{ route('about') }}" class="block rounded-lg px-3 py-2 text-base font-medium text-slate-600 hover:bg-slate-50 hover:text-brand-600">About</a>
-                <a href="{{ route('contact') }}" class="block rounded-lg bg-brand-600 px-3 py-2 text-center text-base font-semibold text-white">Contact Us</a>
+                <a href="{{ route('contact') }}" class="block rounded-full bg-brand-600 px-3 py-2 text-center text-base font-semibold text-white">Contact Us</a>
             </div>
         </div>
     </nav>
@@ -52,12 +52,12 @@
         @yield('content')
     </main>
 
-    <footer class="border-t border-slate-200 bg-slate-50">
+    <footer class="border-t border-warm-border bg-warm-bg">
         <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
             <div class="grid gap-12 md:grid-cols-4">
                 <div class="md:col-span-1">
                     <a href="{{ route('home') }}">
-                        <img src="{{ asset('images/logo.png') }}" alt="ClearClaims Health Accounts" class="h-16 w-auto">
+                        <img src="{{ asset('images/logo.png') }}" alt="ClearClaims Health Accounts" class="h-20 w-auto">
                     </a>
                     <p class="mt-4 text-sm leading-relaxed text-slate-500">Medical billing and practice support solutions that help South African healthcare providers get paid faster and spend less time on admin.</p>
                 </div>

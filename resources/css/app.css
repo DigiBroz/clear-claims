@@ -32,6 +32,14 @@
     --color-growth-700: #1a6b44;
     --color-growth-800: #165536;
     --color-growth-900: #123a26;
+
+    --color-warm-bg: #FBF3E6;
+    --color-warm-surface: #FFFDF8;
+    --color-warm-border: #EDDFC4;
+    --color-warm-text: #5B4C3F;
+
+    --color-peach-300: #F6D9A8;
+    --color-peach-500: #EFC48A;
 }
 
 @layer base {
