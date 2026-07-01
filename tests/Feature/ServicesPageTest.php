@@ -18,4 +18,12 @@ class ServicesPageTest extends TestCase
         $response->assertSee('Practice Financial Reporting', false);
         $response->assertSee('Onboarding Support for New Practices', false);
     }
+
+    public function test_services_hero_and_cta_use_warm_treatment(): void
+    {
+        $response = $this->get('/services');
+
+        $response->assertSee('data-blob-drift', false);
+        $response->assertSee('rounded-full', false);
+    }
 }
