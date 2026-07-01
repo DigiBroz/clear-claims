@@ -25,4 +25,12 @@ class PricingPageTest extends TestCase
         $response->assertSee('rounded-3xl border border-warm-border bg-warm-surface', false);
         $response->assertSee('rounded-full', false);
     }
+
+    public function test_pricing_page_ends_with_warm_cta_section(): void
+    {
+        $response = $this->get('/pricing');
+
+        $response->assertSee('bg-gradient-to-br from-warm-bg to-peach-300/40', false);
+        $response->assertSee('Get a Quote for Your Practice', false);
+    }
 }

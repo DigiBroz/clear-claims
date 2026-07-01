@@ -74,7 +74,12 @@
                     <p class="mt-2 text-slate-600">We can discuss contract terms during your consultation. Our aim is a straightforward working relationship, not one built around lock-in fees.</p>
                 </div>
             </div>
-            <a href="{{ route('contact') }}" class="mt-12 inline-flex items-center rounded-full bg-brand-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/20 transition hover:bg-brand-700">Get a Quote for Your Practice</a>
         </div>
     </section>
+
+    <x-warm-cta>
+        <h2 class="text-3xl font-bold text-brand-900">Ready to See What This Looks Like for Your Practice?</h2>
+        <p class="mt-4 text-slate-700">Tell us about your practice and we will walk you through a percentage that reflects your size, specialty, and claims volume.</p>
+        <a href="{{ route('contact') }}" class="mt-8 inline-flex items-center rounded-full bg-brand-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/20 transition hover:bg-brand-700">Get a Quote for Your Practice</a>
+    </x-warm-cta>
 @endsection
