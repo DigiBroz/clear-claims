@@ -24,4 +24,13 @@ class HomePageTest extends TestCase
         $response->assertSee('Get Paid Faster', false);
         $response->assertSee('medical billing', false);
     }
+
+    public function test_home_hero_uses_warm_components_and_honest_floating_chip(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertSee('data-blob-drift', false);
+        $response->assertSee('You only pay when we collect', false);
+        $response->assertSee('rounded-3xl border border-warm-border bg-warm-surface', false);
+    }
 }

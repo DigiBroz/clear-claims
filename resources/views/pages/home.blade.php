@@ -2,19 +2,28 @@
 
 @section('content')
     {{-- Hero --}}
-    <section class="relative overflow-hidden border-b border-slate-200 bg-gradient-to-b from-brand-50 to-white">
-        <div class="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
-            <h1 class="max-w-3xl text-4xl font-bold text-brand-900 sm:text-5xl">Get Paid Faster. Do Less Admin. Stay Focused on Patients.</h1>
-            <p class="mt-6 max-w-2xl text-lg text-slate-600">ClearClaims Health Accounts handles medical billing and practice support so your team can spend less time chasing medical aids and more time treating patients.</p>
-            <div class="mt-10 flex flex-wrap gap-4">
-                <a href="{{ route('contact') }}" class="inline-flex items-center rounded-lg bg-brand-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/20 transition hover:bg-brand-700">Book a Free Consultation</a>
-                <a href="{{ route('pricing') }}" class="inline-flex items-center rounded-lg border border-slate-300 px-8 py-3.5 text-base font-semibold text-slate-700 transition hover:border-brand-400 hover:text-brand-700">See Our Pricing Model</a>
+    <x-warm-hero>
+        <div class="grid items-center gap-12 lg:grid-cols-2">
+            <div>
+                <h1 class="max-w-xl text-4xl font-bold text-brand-900 sm:text-5xl">Get Paid Faster. Do Less Admin. Stay Focused on Patients.</h1>
+                <p class="mt-6 max-w-xl text-lg text-slate-600">ClearClaims Health Accounts handles medical billing and practice support so your team can spend less time chasing medical aids and more time treating patients.</p>
+                <div class="mt-10 flex flex-wrap gap-4">
+                    <a href="{{ route('contact') }}" class="inline-flex items-center rounded-full bg-brand-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/20 transition hover:bg-brand-700">Book a Free Consultation</a>
+                    <a href="{{ route('pricing') }}" class="inline-flex items-center rounded-full border border-warm-border bg-warm-surface px-8 py-3.5 text-base font-semibold text-slate-700 transition hover:border-brand-400 hover:text-brand-700">See Our Pricing Model</a>
+                </div>
             </div>
-            <div class="mt-16">
-                <x-arrow-motif class="h-24 w-full max-w-2xl" />
+            <div class="relative">
+                <x-warm-chart-card>
+                    <p class="text-xs font-semibold uppercase tracking-wider text-warm-text/70">Our Pricing Model</p>
+                    <p class="mt-1 text-lg font-semibold text-brand-900">Percentage of Collections</p>
+                    <x-arrow-motif class="mt-4 h-20 w-full" />
+                </x-warm-chart-card>
+                <x-warm-floating-chip class="absolute -bottom-6 -left-6 hidden sm:inline-flex">
+                    You only pay when we collect
+                </x-warm-floating-chip>
             </div>
         </div>
-    </section>
+    </x-warm-hero>
 
     {{-- Services overview --}}
     <section class="py-24">
