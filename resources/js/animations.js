@@ -24,7 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.querySelectorAll('main section').forEach((section) => {
-        gsap.from(section.querySelectorAll('h1, h2, h3, p, .rounded-xl, form'), {
+        const targets = Array.from(section.querySelectorAll('h1, h2, h3, p, .rounded-xl, form')).filter((el) => {
+            const card = el.closest('.rounded-xl');
+            return !card || card === el;
+        });
+
+        gsap.from(targets, {
             scrollTrigger: {
                 trigger: section,
                 start: 'top 85%',
