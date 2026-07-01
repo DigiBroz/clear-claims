@@ -42,4 +42,27 @@ document.addEventListener('DOMContentLoaded', () => {
             ease: 'power2.out',
         });
     });
+
+    document.querySelectorAll('[data-blob-drift]').forEach((blob, index) => {
+        gsap.to(blob, {
+            x: index % 2 === 0 ? 18 : -14,
+            y: index % 2 === 0 ? -14 : 16,
+            scale: 1.06,
+            duration: 6 + index,
+            ease: 'sine.inOut',
+            repeat: -1,
+            yoyo: true,
+        });
+    });
+
+    document.querySelectorAll('[data-float-chip]').forEach((chip, index) => {
+        gsap.to(chip, {
+            y: -10,
+            duration: 3.4 + index * 0.4,
+            ease: 'sine.inOut',
+            repeat: -1,
+            yoyo: true,
+            delay: index * 0.3,
+        });
+    });
 });
