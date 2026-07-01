@@ -19,7 +19,7 @@
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between">
                 <a href="{{ route('home') }}" class="py-2">
-                    <img src="{{ asset('images/logo.png') }}" alt="ClearClaims Health Accounts" class="h-36 w-auto">
+                    <img src="{{ asset('images/logo.png') }}" alt="ClearClaims Health Accounts" class="h-32 w-auto">
                 </a>
 
                 <div class="hidden items-center gap-8 md:flex">
