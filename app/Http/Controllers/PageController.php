@@ -35,4 +35,14 @@ class PageController extends Controller
 
         return view('pages.home');
     }
+
+    public function services()
+    {
+        SEOTools::setTitle('Medical Billing Services');
+        SEOTools::setDescription('Explore ClearClaims full medical billing service, from claims submission and medical aid follow-ups to payment reconciliation, patient account management, financial reporting, and onboarding support.');
+        $this->setMedicalBusinessJsonLd();
+        $this->setSeoImage();
+
+        return view('pages.services');
+    }
 }
