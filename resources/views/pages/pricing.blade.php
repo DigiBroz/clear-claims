@@ -1,12 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="relative overflow-hidden border-b border-slate-200 bg-gradient-to-b from-brand-50 to-white">
-        <div class="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
-            <h1 class="text-4xl font-bold text-brand-900 sm:text-5xl">A Pricing Model Built Around Getting You Paid</h1>
-            <p class="mt-4 max-w-2xl text-lg text-slate-600">Most medical billing services charge a flat monthly fee or a percentage of the claims they submit, whether or not those claims are ever paid. ClearClaims works differently.</p>
-        </div>
-    </section>
+    <x-warm-hero>
+        <h1 class="text-4xl font-bold text-brand-900 sm:text-5xl">A Pricing Model Built Around Getting You Paid</h1>
+        <p class="mt-4 max-w-2xl text-lg text-slate-600">Most medical billing services charge a flat monthly fee or a percentage of the claims they submit, whether or not those claims are ever paid. ClearClaims works differently.</p>
+    </x-warm-hero>
 
     <section class="py-24">
         <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
@@ -14,7 +12,9 @@
             <p class="mt-6 text-slate-600">Our fee is a percentage of the money that is successfully paid out to your practice by the medical aid. It is never charged on the value of claims submitted, and it is never charged on claims that are rejected, disputed, or never paid. If a medical aid does not pay, we do not get paid either.</p>
             <p class="mt-4 text-slate-600">This means our incentives are aligned with yours from the first claim we submit. We are not paid for volume of paperwork. We are paid for money that actually lands in your practice's account, which is why we follow up on outstanding claims as hard as we do.</p>
             <div class="mt-10">
-                <x-arrow-motif class="h-24 w-full" />
+                <x-warm-chart-card>
+                    <x-arrow-motif class="h-24 w-full" />
+                </x-warm-chart-card>
             </div>
         </div>
     </section>
@@ -74,7 +74,7 @@
                     <p class="mt-2 text-slate-600">We can discuss contract terms during your consultation. Our aim is a straightforward working relationship, not one built around lock-in fees.</p>
                 </div>
             </div>
-            <a href="{{ route('contact') }}" class="mt-12 inline-flex items-center rounded-lg bg-brand-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/20 transition hover:bg-brand-700">Get a Quote for Your Practice</a>
+            <a href="{{ route('contact') }}" class="mt-12 inline-flex items-center rounded-full bg-brand-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/20 transition hover:bg-brand-700">Get a Quote for Your Practice</a>
         </div>
     </section>
 @endsection

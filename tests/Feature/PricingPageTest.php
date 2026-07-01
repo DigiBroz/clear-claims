@@ -16,4 +16,13 @@ class PricingPageTest extends TestCase
         $response->assertSee('never charged on the value of claims submitted', false);
         $response->assertSee('What percentage do you charge', false);
     }
+
+    public function test_pricing_hero_and_model_chart_use_warm_treatment(): void
+    {
+        $response = $this->get('/pricing');
+
+        $response->assertSee('data-blob-drift', false);
+        $response->assertSee('rounded-3xl border border-warm-border bg-warm-surface', false);
+        $response->assertSee('rounded-full', false);
+    }
 }
