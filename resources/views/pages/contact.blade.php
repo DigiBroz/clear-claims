@@ -1,12 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="relative overflow-hidden border-b border-slate-200 bg-gradient-to-b from-brand-50 to-white">
-        <div class="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
-            <h1 class="text-4xl font-bold text-brand-900 sm:text-5xl">Let's Talk About Your Practice's Billing</h1>
-            <p class="mt-4 max-w-2xl text-lg text-slate-600">Tell us a bit about your practice and we will get back to you to discuss how ClearClaims can help.</p>
-        </div>
-    </section>
+    <x-warm-hero>
+        <h1 class="text-4xl font-bold text-brand-900 sm:text-5xl">Let's Talk About Your Practice's Billing</h1>
+        <p class="mt-4 max-w-2xl text-lg text-slate-600">Tell us a bit about your practice and we will get back to you to discuss how ClearClaims can help.</p>
+    </x-warm-hero>
 
     <section class="py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -77,7 +75,7 @@
                                 placeholder="Tell us about your practice's billing needs...">{{ old('message') }}</textarea>
                         </div>
                         <button type="submit"
-                            class="inline-flex w-full items-center justify-center rounded-lg bg-brand-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/20 transition hover:bg-brand-700 sm:w-auto">
+                            class="inline-flex w-full items-center justify-center rounded-full bg-brand-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/20 transition hover:bg-brand-700 sm:w-auto">
                             Send Message
                         </button>
                     </form>

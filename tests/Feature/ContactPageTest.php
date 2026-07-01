@@ -15,4 +15,12 @@ class ContactPageTest extends TestCase
         $response->assertSee('info@clearclaims.health', false);
         $response->assertSee('Fewer rejected claims', false);
     }
+
+    public function test_contact_hero_uses_warm_treatment_and_submit_button_is_a_pill(): void
+    {
+        $response = $this->get('/contact');
+
+        $response->assertSee('data-blob-drift', false);
+        $response->assertSee('rounded-full', false);
+    }
 }
