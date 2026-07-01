@@ -1,11 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="relative overflow-hidden border-b border-slate-200 bg-gradient-to-b from-brand-50 to-white">
-        <div class="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
-            <h1 class="text-4xl font-bold text-brand-900 sm:text-5xl">Medical Billing Support That Lets You Focus on Patients</h1>
-        </div>
-    </section>
+    <x-warm-hero>
+        <h1 class="text-4xl font-bold text-brand-900 sm:text-5xl">Medical Billing Support That Lets You Focus on Patients</h1>
+    </x-warm-hero>
 
     <section class="py-24">
         <div class="mx-auto max-w-4xl space-y-12 px-4 sm:px-6 lg:px-8">
@@ -33,10 +31,8 @@
         </div>
     </section>
 
-    <section class="border-t border-slate-200 bg-slate-50 py-24">
-        <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-brand-900">Want to Talk Through Your Practice's Billing?</h2>
-            <a href="{{ route('contact') }}" class="mt-8 inline-flex items-center rounded-lg bg-brand-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/20 transition hover:bg-brand-700">Get in Touch</a>
-        </div>
-    </section>
+    <x-warm-cta>
+        <h2 class="text-3xl font-bold text-brand-900">Want to Talk Through Your Practice's Billing?</h2>
+        <a href="{{ route('contact') }}" class="mt-8 inline-flex items-center rounded-full bg-brand-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/20 transition hover:bg-brand-700">Get in Touch</a>
+    </x-warm-cta>
 @endsection

@@ -14,4 +14,12 @@ class AboutPageTest extends TestCase
         $response->assertSee('accurate, efficient, and transparent medical billing solutions', false);
         $response->assertSee('general practitioners, specialists, and allied health practices', false);
     }
+
+    public function test_about_hero_and_cta_use_warm_treatment(): void
+    {
+        $response = $this->get('/about');
+
+        $response->assertSee('data-blob-drift', false);
+        $response->assertSee('rounded-full', false);
+    }
 }
