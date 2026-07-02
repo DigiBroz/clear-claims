@@ -71,6 +71,7 @@ git commit -m "Document Resend mail config in .env.example"
 ### Task 2: Add the ClearClaims logo to the email header
 
 **Files:**
+- Modify: `config/mail.php`
 - Create: `resources/views/vendor/mail/html/message.blade.php`
 - Test: `tests/Feature/ContactFormMailTemplateTest.php`
 
@@ -78,7 +79,7 @@ git commit -m "Document Resend mail config in .env.example"
 - Consumes: `public/images/logo.png` (existing asset, 1536×568px), `config('app.name')`, `config('app.url')`.
 - Produces: overrides Laravel's default markdown mail header for every `<x-mail::message>`-based email in the app (currently only `mail.contact-form` uses it).
 
-Laravel auto-discovers views placed at `resources/views/vendor/mail/` and prefers them over the framework's built-in versions (see `Illuminate\Support\ServiceProvider::loadViewsFrom`) — no `vendor:publish` command or config change is needed, just creating the file at this exact path.
+**Discovered during implementation:** Laravel 13's default `config/mail.php` has no `markdown` key, and `Illuminate\Mail\MailServiceProvider` does not auto-register `resources/views/vendor/mail` the way older Laravel versions' `loadViewsFrom` did — the `mail::` component namespace is only registered dynamically inside `Illuminate\Mail\Markdown::render()`, using `config('mail.markdown.paths')`. Without adding that config key, the override file is silently ignored (and a plain `view('mail.contact-form')` call throws "No hint path defined for [mail]" since the `mail::` namespace isn't registered outside the `Markdown::render()` codepath at all). Both the test and the Task 3 preview route must render through `app(\Illuminate\Mail\Markdown::class)->render(...)`, not a plain `view()` call.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -116,7 +117,20 @@ class ContactFormMailTemplateTest extends TestCase
 Run: `php artisan test --filter=ContactFormMailTemplateTest`
 Expected: FAIL — the rendered HTML does not contain `images/logo.png` (current header just renders the app name as text).
 
-- [ ] **Step 3: Create the overriding view**
+- [ ] **Step 3a: Add markdown config**
+
+Add to `config/mail.php`, after the `'from'` array:
+
+```php
+'markdown' => [
+    'theme' => 'default',
+    'paths' => [
+        resource_path('views/vendor/mail'),
+    ],
+],
+```
+
+- [ ] **Step 3b: Create the overriding view**
 
 Create `resources/views/vendor/mail/html/message.blade.php` (copied from Laravel's default at `vendor/laravel/framework/src/Illuminate/Mail/resources/views/html/message.blade.php`, with only the header slot changed):
 
