@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PageController;
+use Illuminate\Mail\Markdown;
 use Illuminate\Support\Facades\Route;
 use Spatie\Honeypot\ProtectAgainstSpam;
 
@@ -18,6 +19,19 @@ Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::post('/contact', [ContactController::class, 'submit'])
     ->middleware([ProtectAgainstSpam::class, 'throttle:5,1'])
     ->name('contact.submit');
+
+Route::get('/dev/preview/contact-form', function (Markdown $markdown) {
+    abort_unless(app()->environment('local'), 404);
+
+    return $markdown->render('mail.contact-form', [
+        'firstName' => 'Jane',
+        'lastName' => 'Doe',
+        'email' => 'jane@example.com',
+        'company' => 'Acme Family Practice',
+        'service' => 'submission',
+        'body' => "We'd like to discuss moving our billing to ClearClaims.",
+    ]);
+})->name('dev.preview.contact-form');
 
 Route::get('/sitemap.xml', function () {
     return response(file_get_contents(public_path('sitemap.xml')), 200, ['Content-Type' => 'application/xml']);
