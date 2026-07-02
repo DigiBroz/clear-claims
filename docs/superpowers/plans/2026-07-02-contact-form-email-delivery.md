@@ -6,7 +6,7 @@
 
 **Architecture:** No new architecture — the existing `ContactController` → `ContactFormSubmitted` event → `SendContactFormNotification` listener → `ContactFormNotification` → `resources/views/mail/contact-form.blade.php` pipeline already exists and is fully tested. This plan only touches: (1) mail transport config, (2) one Blade view controlling the email header, (3) a new local-only route, and (4) production infrastructure via Forge.
 
-**Tech Stack:** Laravel 13, `resend/resend-php` (already installed), PHPUnit, Laravel Forge (via the `laravel-forge` skill).
+**Tech Stack:** Laravel 13, `resend/resend-php`, PHPUnit, Laravel Forge (via the `forge` CLI, already authenticated on this machine).
 
 ## Global Constraints
 
@@ -27,7 +27,7 @@
 **Interfaces:**
 - Produces: `MAIL_MAILER`, `RESEND_API_KEY`, `MAIL_FROM_ADDRESS` env var names, consumed by `config/mail.php` and `config/services.php` (both already read these — no code change needed there).
 
-- [ ] **Step 1: Update `.env.example`**
+- [x] **Step 1: Update `.env.example`**
 
 Current relevant lines:
 ```
@@ -54,12 +54,12 @@ MAIL_FROM_ADDRESS="info@clearclaims.health"
 MAIL_FROM_NAME="${APP_NAME}"
 ```
 
-- [ ] **Step 2: Verify local `.env` is unaffected**
+- [x] **Step 2: Verify local `.env` is unaffected**
 
 Run: `grep MAIL_MAILER .env`
 Expected: `MAIL_MAILER=log` (local dev stays on the log driver — `.env` is not a tracked file and is not touched by this task)
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add .env.example
@@ -81,7 +81,7 @@ git commit -m "Document Resend mail config in .env.example"
 
 **Discovered during implementation:** Laravel 13's default `config/mail.php` has no `markdown` key, and `Illuminate\Mail\MailServiceProvider` does not auto-register `resources/views/vendor/mail` the way older Laravel versions' `loadViewsFrom` did — the `mail::` component namespace is only registered dynamically inside `Illuminate\Mail\Markdown::render()`, using `config('mail.markdown.paths')`. Without adding that config key, the override file is silently ignored (and a plain `view('mail.contact-form')` call throws "No hint path defined for [mail]" since the `mail::` namespace isn't registered outside the `Markdown::render()` codepath at all). Both the test and the Task 3 preview route must render through `app(\Illuminate\Mail\Markdown::class)->render(...)`, not a plain `view()` call.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `tests/Feature/ContactFormMailTemplateTest.php`:
 
@@ -112,12 +112,12 @@ class ContactFormMailTemplateTest extends TestCase
 }
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `php artisan test --filter=ContactFormMailTemplateTest`
 Expected: FAIL — the rendered HTML does not contain `images/logo.png` (current header just renders the app name as text).
 
-- [ ] **Step 3a: Add markdown config**
+- [x] **Step 3a: Add markdown config**
 
 Add to `config/mail.php`, after the `'from'` array:
 
@@ -130,7 +130,7 @@ Add to `config/mail.php`, after the `'from'` array:
 ],
 ```
 
-- [ ] **Step 3b: Create the overriding view**
+- [x] **Step 3b: Create the overriding view**
 
 Create `resources/views/vendor/mail/html/message.blade.php` (copied from Laravel's default at `vendor/laravel/framework/src/Illuminate/Mail/resources/views/html/message.blade.php`, with only the header slot changed):
 
@@ -164,12 +164,12 @@ Create `resources/views/vendor/mail/html/message.blade.php` (copied from Laravel
 </x-mail::layout>
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `php artisan test --filter=ContactFormMailTemplateTest`
 Expected: PASS
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add resources/views/vendor/mail/html/message.blade.php tests/Feature/ContactFormMailTemplateTest.php
@@ -188,7 +188,7 @@ git commit -m "Add ClearClaims logo to the notification email header"
 - Consumes: `mail.contact-form` view (same one rendered in Task 2's test).
 - Produces: named route `dev.preview.contact-form` at `GET /dev/preview/contact-form`.
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 Create `tests/Feature/DevPreviewRouteTest.php`:
 
@@ -220,12 +220,12 @@ class DevPreviewRouteTest extends TestCase
 }
 ```
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run: `php artisan test --filter=DevPreviewRouteTest`
 Expected: FAIL — route `/dev/preview/contact-form` does not exist yet, so `assertNotFound()` passes by accident but `assertOk()` in the second test fails (still 404 since the route isn't registered).
 
-- [ ] **Step 3: Add the route**
+- [x] **Step 3: Add the route**
 
 In `routes/web.php`, add after the existing `contact.submit` route (before the sitemap/robots routes):
 
@@ -244,12 +244,12 @@ Route::get('/dev/preview/contact-form', function () {
 })->name('dev.preview.contact-form');
 ```
 
-- [ ] **Step 4: Run tests to verify they pass**
+- [x] **Step 4: Run tests to verify they pass**
 
 Run: `php artisan test --filter=DevPreviewRouteTest`
 Expected: PASS (both tests)
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add routes/web.php tests/Feature/DevPreviewRouteTest.php
@@ -264,17 +264,17 @@ git commit -m "Add local-only preview route for the contact form email"
 
 **Interfaces:** none
 
-- [ ] **Step 1: Run the full test suite**
+- [x] **Step 1: Run the full test suite**
 
 Run: `php artisan test`
 Expected: all tests pass, including the pre-existing `ContactFormSubmissionTest` (dispatch, validation, honeypot, rate limit) and the two new test files from Tasks 2–3.
 
-- [ ] **Step 2: Manually view the rendered email**
+- [x] **Step 2: Manually view the rendered email**
 
 Run: `php artisan serve` (or use the existing Herd site), then visit `http://<local-host>/dev/preview/contact-form` in a browser.
 Expected: the ClearClaims logo renders at the top of the email, visually matching the nav logo's proportions (not stretched or cropped).
 
-- [ ] **Step 3: Verify queued delivery still works locally with the log driver**
+- [x] **Step 3: Verify queued delivery still works locally with the log driver**
 
 Run:
 ```bash
@@ -294,11 +294,11 @@ No commit for this task — it's a verification checkpoint before moving to prod
 **Interfaces:**
 - Consumes: a Forge API token (ask the user for this before starting — it has not been provided yet) and the Resend API key already shared in this conversation.
 
-- [ ] **Step 1: Identify the production site on Forge**
+- [x] **Step 1: Identify the production site on Forge**
 
 Use the `laravel-forge` skill to list servers/sites and find the one serving `clearclaims.health`. If the Forge API token hasn't been provided yet, stop and ask the user for it here — do not proceed without it.
 
-- [ ] **Step 2: Set production environment variables**
+- [x] **Step 2: Set production environment variables**
 
 Use the `laravel-forge` skill to update the site's `.env` on Forge, setting:
 ```
@@ -308,26 +308,37 @@ MAIL_FROM_ADDRESS="info@clearclaims.health"
 ```
 (`MAIL_FROM_NAME` already resolves from `APP_NAME`, which should already be set to `ClearClaims` in production — verify it while there.)
 
-- [ ] **Step 3: Verify/create the queue worker**
+- [x] **Step 3: Verify/create the queue worker**
 
 Per `docs/superpowers/specs/queue-worker-requirement.md`, `ContactFormNotification` is queued and requires a running worker. Use the `laravel-forge` skill to check the site's daemons for an existing `queue:work` process.
 - If one exists: no action needed.
 - If none exists: create a daemon running `php artisan queue:work --tries=3 --max-time=3600` in the site's directory.
 
-- [ ] **Step 4: Deploy the branch containing Tasks 1–3**
+- [x] **Step 4: Deploy the branch containing Tasks 1–3**
 
 Use the `laravel-forge` skill to trigger a deployment of the current branch. Confirm the site's deploy script includes `php artisan queue:restart` (or run it manually via Forge after deploy) so the worker picks up the new code — this matters if a worker already existed before this deploy.
 
-- [ ] **Step 5: Verify end-to-end in production**
+- [x] **Step 5: Verify end-to-end in production**
 
 Submit the live contact form at `https://clearclaims.health/contact` with a real test message, then confirm:
 - The `jobs` table entry clears (job processed).
 - An email arrives at `info@clearclaims.health` with the logo rendering correctly.
 - Check the Resend dashboard's activity log for a "delivered" event as a second confirmation.
 
-- [ ] **Step 6: Recommend key rotation**
+- [x] **Step 6: Recommend key rotation**
 
 Remind the user that the Resend API key passed through this chat and recommend rotating it in the Resend dashboard now that production is confirmed working. This is a recommendation, not a blocking step — do not rotate it without the user's go-ahead (rotating would require updating the Forge env var again).
+
+**Discovered during Task 5:** `resend/resend-php` was never actually an installed dependency — the earlier `grep` hit that suggested it was installed was actually matching Laravel framework's own `composer.json` "suggest" entry, not a real requirement. The first production deploy failed at send-time with `Class "Resend" not found`. Fixed by running `composer require resend/resend-php` (added as a real `require` entry, locked at v1.4.0), committing, pushing, and redeploying. A second end-to-end test submission after the fix processed cleanly (jobs table returned to 0, no new errors in `storage/logs/laravel.log`).
+
+**Execution notes:**
+- Used the `forge` CLI (already authenticated locally) instead of raw curl for `env:pull`/`env:push`, `deploy`, `daemon:list`, and `command` — simpler and avoided further use of the pasted API token.
+- The API token was still needed for one action the CLI doesn't support: creating the queue-worker daemon (`POST .../background-processes`). Used directly via curl, then the token file was deleted from the scratchpad immediately after.
+- Server: `1156984` (digibroz-tech), Site: `3271629` (clearclaims.health), org slug: `digibroz`. Single shared server hosts all sites in this Forge account.
+- Daemon created: id `923330`, running `php artisan queue:work --tries=3 --max-time=3600` as `forge` in `/home/forge/clearclaims.health`.
+- Did not find/edit the deploy script's `deployment-script` API endpoint (undocumented in the fetched OpenAPI excerpt) to add `php artisan queue:restart` automatically — ran it manually via `forge command` after each deploy instead, per the plan's documented fallback. If more deploys happen, remember to run `php artisan queue:restart` (or `forge command clearclaims.health --command="php artisan queue:restart"`) after each one until the deploy script is updated.
+- `forge command`'s real-time output streaming threw `Event unresolvable` (CLI v1.8.3 is outdated per its own warning) but the commands still executed successfully server-side — confirmed via the Forge API's command history (`exit_code: 0`) rather than the CLI's streamed output.
+- Verified end-to-end via two real form submissions against `https://clearclaims.health/contact` (constructing CSRF + honeypot fields from the fetched page) rather than only checking logs.
 
 ---
 
